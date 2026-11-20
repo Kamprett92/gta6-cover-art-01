@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Sunset Cover Maker — GTA-style poster studio</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="panel controls" aria-label="Cover controls">
+    <header>
+      <h1>Neon Sunset Cover Maker</h1>
+      <p class="tagline">Turn your photos into a Vice City-style poster. Everything stays on your machine — photos are never uploaded.</p>
+    </header>
+
+    <fieldset>
+      <legend>1 · Photos</legend>
+      <p class="hint">Pick a photo for each panel, or load one photo into every panel.</p>
+      <div class="photo-rows" id="photoRows"></div>
+      <div class="row">
+        <button id="fillAll" type="button" class="ghost">Use panel 1 photo in all panels</button>
+        <button id="useSamples" type="button" class="ghost">Try the sample photos</button>
+      </div>
+      <input id="filePicker" type="file" accept="image/*" hidden>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Layout &amp; size</legend>
+      <div class="seg" role="group" aria-label="Poster layout" id="layoutSeg">
+        <button type="button" data-layout="hero" class="on">Hero + 2</button>
+        <button type="button" data-layout="split">Split</button>
+        <button type="button" data-layout="triptych">Triptych</button>
+      </div>
+      <label class="field">Export size
+        <select id="sizeSel">
+          <option value="1080x1080">Square · 1080 × 1080</option>
+          <option value="1080x1350">Portrait · 1080 × 1350</option>
+          <option value="1920x1080">Wide · 1920 × 1080</option>
+        </select>
+      </label>
+      <label class="field">Colour grade
+        <select id="gradeSel">
+          <option value="sunset">Vice Sunset — pink &amp; orange</option>
+          <option value="neon">Neon Nights — magenta &amp; teal</option>
+          <option value="dusk">Teal Dusk — cool blue &amp; gold</option>
+        </select>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Crop the selected panel</legend>
+      <p class="hint">Click a panel in the preview to select it, then drag it to move or scroll to zoom.</p>
+      <div class="seg" role="group" aria-label="Select panel" id="panelSeg">
+        <button type="button" data-panel="0" class="on">Panel 1</button>
+        <button type="button" data-panel="1">Panel 2</button>
+        <button type="button" data-panel="2">Panel 3</button>
+      </div>
+      <label class="field">Zoom <span id="zoomVal">100%</span>
+        <input id="zoom" type="range" min="100" max="300" value="100">
+      </label>
+      <label class="field">Move sideways
+        <input id="panX" type="range" min="-50" max="50" value="0">
+      </label>
+      <label class="field">Move up / down
+        <input id="panY" type="range" min="-50" max="50" value="0">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Words</legend>
+      <label class="field">Big caption
+        <input id="caption" type="text" maxlength="32" value="Sunset Heist">
+      </label>
+      <label class="field">Small line under it
+        <input id="subtitle" type="text" maxlength="48" value="One last ride down the boulevard">
+      </label>
+      <label class="field">Caption style
+        <select id="captionStyle">
+          <option value="banner">Banner — white on a hot-pink band</option>
+          <option value="outline">Outline — huge letters, no band</option>
+          <option value="corner">Corner — small, bottom-left</option>
+        </select>
+      </label>
+    </fieldset>
+
+    <button id="export" type="button" class="primary">Export PNG</button>
+    <p id="status" role="status"></p>
+    <p class="fine">Original artwork made by you, in your own design. No game logos, artwork or fonts are used here.</p>
+  </section>
+
+  <section class="preview" aria-label="Live preview">
+    <canvas id="cover" width="1080" height="1080"></canvas>
+    <p class="preview-note">Live preview — click a panel to crop it.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
